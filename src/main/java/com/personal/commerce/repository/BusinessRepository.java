@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
 public interface BusinessRepository extends JpaRepository<Business, Long> {
-    
+    Business findByEmail(String email);
 }

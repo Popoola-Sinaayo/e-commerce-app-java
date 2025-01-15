@@ -48,19 +48,19 @@ public class Business {
         return this.password;
     }
 
-    String setPassword(String password) {
+    public String setPassword(String password) {
         return this.password = password;
     }
 
-    String setEmail(String email) {
+    public String setEmail(String email) {
         return this.email = email;
     }
 
-    String setAddress(String address) {
+    public String setAddress(String address) {
         return this.address = address;
     }
 
-    String setName(String name) {
+    public String setName(String name) {
         return this.name = name;
     }
 
