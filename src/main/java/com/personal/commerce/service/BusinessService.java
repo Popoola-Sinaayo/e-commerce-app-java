@@ -1,5 +1,7 @@
 package com.personal.commerce.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,10 @@ public class BusinessService {
     }
 
     public Business addBusiness(Business business) {
+        Optional<Business> businessOptional = Optional.ofNullable(businessRepository.findByEmail(business.getEmail()));
+        if (businessOptional.isPresent()) {
+            throw new RuntimeException("Business by email " + business.getEmail() + " already exists");
+        }
         return businessRepository.save(business);
     }
 
