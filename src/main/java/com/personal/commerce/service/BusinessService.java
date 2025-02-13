@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.personal.commerce.model.Business;
 import com.personal.commerce.repository.BusinessRepository;
+import com.personal.commerce.utils.ResourceBadRequestException;
 
 @Service
 public class BusinessService {
@@ -20,7 +21,7 @@ public class BusinessService {
     public Business addBusiness(Business business) {
         Optional<Business> businessOptional = Optional.ofNullable(businessRepository.findByEmail(business.getEmail()));
         if (businessOptional.isPresent()) {
-            throw new RuntimeException("Business by email " + business.getEmail() + " already exists");
+            throw new ResourceBadRequestException("Business by email " + business.getEmail() + " already exists");
         }
         return businessRepository.save(business);
     }
@@ -35,13 +36,13 @@ public class BusinessService {
 
     public Business findBusinessById(Long id) {
         return businessRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Business by id " + id + " was not found"));
+                .orElseThrow(() -> new ResourceBadRequestException("Business by id " + id + " was not found"));
     }
 
     public Business findBusinessByEmail(String email) {
         Business business = businessRepository.findByEmail(email);
         if (business == null) {
-            throw new RuntimeException("Business by email " + email + " was not found");
+            throw new ResourceBadRequestException("Business by email " + email + " was not found");
         }
         else {
             return business;
